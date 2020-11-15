@@ -5,7 +5,11 @@ import { useStore } from '../../hooks/useStore';
 
 export default function ViewPage() {
     const history = useHistory();
-    const modpack = useSelectedModpack()
+    const modpack = useSelectedModpack();
+
+    const goToSearchPage = () => {
+        history.push('/search');
+    }
 
     if(!modpack) {
         history.push('/');
@@ -22,6 +26,7 @@ export default function ViewPage() {
                     })}
                 </ul>
             </div>
+            <button onClick={goToSearchPage}>Add More Mods</button>
         </div>
     );
 }

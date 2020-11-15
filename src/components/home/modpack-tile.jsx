@@ -16,7 +16,7 @@ export default function ModpackTile({modpack}) {
                 onClick={() => {
                     console.log('setting id', modpack.id);
                     dispatch(setSelectedModpack(modpack.id))
-                    history.push('/search')
+                    history.push('/view')
                 }}
             >
                 View/Edit

@@ -5,8 +5,9 @@ import {useStore} from '../../hooks/useStore';
 import ModpackTile from './modpack-tile';
 
 export default function HomePage() {
-    const {modpacks} = useStore();
+    // const {modpacks} = useStore();
     const storage = useStorage();
+    const modpacks = storage.get('modpacks');
     const history = useHistory();
 
     if(!storage.get('username')) {
@@ -18,10 +19,10 @@ export default function HomePage() {
             <h1>Fabric Mod Loader - Unofficial</h1>
             <div>
                 <h2>{storage.get('username')} Modpacks</h2>
-                {modpacks.map(mp => {
+                {Object.values(modpacks).map(mp => {
                     return <ModpackTile key={mp.displayName} modpack={mp}/>
                 })}
-                <button>New Modpack</button>
+                <button onClick={() => history.push('/new')}>New Modpack</button>
             </div>
         </div>
     );

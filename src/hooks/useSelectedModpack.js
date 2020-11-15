@@ -1,7 +1,10 @@
+import { modpackArr } from '../data/mock-data';
+import { useStorage } from './useStorage';
 import { useStore } from './useStore';
 
 export const useSelectedModpack = () => {
-    const {selectedModpack, modpacks} = useStore();
-    const modpack = modpacks.filter(mp => mp.id === selectedModpack)[0];
+    const {selectedModpack} = useStore();
+    const storage = useStorage();
+    const modpack = storage.get('modpacks')[selectedModpack];
     return modpack;
 }

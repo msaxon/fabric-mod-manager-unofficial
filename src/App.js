@@ -6,6 +6,7 @@ import SearchPage from "./components/search/search-page";
 import { useStorage } from "./hooks/useStorage";
 import * as _constants from './utils/constants';
 import './App.css';
+import NewModpackPage from "./components/new/new-modpack-page";
 
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
     storage.clear();
     window.location.reload();
   }
+
+  console.log('storage', storage.get('modpacks'));
 
   return (
     <div className="App">
@@ -36,6 +39,9 @@ function App() {
           </Route>
           <Route path="/search">
             <SearchPage />
+          </Route>
+          <Route path="/new">
+            <NewModpackPage />
           </Route>
         </Switch>
       </Router>
