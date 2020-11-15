@@ -1,18 +1,20 @@
 import React, {useReducer} from 'react';
 import * as _actions from './actions';
 import * as _constants from '../utils/constants';
+import { modpackArr } from '../data/mock-data';
 
 export const Store = React.createContext();
 
 const initialState = {
     page: _constants.PAGE_HOME,
-    username: ''
+    selectedModpack: null,
+    modpacks: modpackArr
 };
 
 const reducer = (state, action) => {
-    switch(action.state) {
-        case _actions.SET_PAGE: 
-            return {...state, page: action.payload}
+    switch(action.type) {
+        case _actions.SET_SELECTED_MODPACK:
+            return {...state, selectedModpack: action.payload}
         default: 
             return state;
     }

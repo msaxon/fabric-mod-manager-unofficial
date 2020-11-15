@@ -1,5 +1,3 @@
-import Mod from './mod';
-
 export default class ModPack {
     constructor(
         id,
