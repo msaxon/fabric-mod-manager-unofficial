@@ -7,6 +7,7 @@ import { useStorage } from "./hooks/useStorage";
 import * as _constants from './utils/constants';
 import './App.css';
 import NewModpackPage from "./components/new/new-modpack-page";
+import CategoriesPage from "./components/categories/categories-page";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <HomePage />
+            {/* <CategoriesPage /> */}
           </Route>
           <Route path="/view">
             <ViewPage />
@@ -42,6 +44,9 @@ function App() {
           </Route>
           <Route path="/new">
             <NewModpackPage />
+          </Route>
+          <Route path="/new">
+            <CategoriesPage />
           </Route>
         </Switch>
       </Router>

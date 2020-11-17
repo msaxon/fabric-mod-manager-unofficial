@@ -5,7 +5,8 @@ const {storage} = window;
 const baseUrl = 'https://addons-ecs.forgesvc.net/api/v2/addon/search';
 const gameId = '432';
 const sectionId = '6';
-const categoryId = '0';
+// const categoryId = '0';
+const categoryId = '4780'; //fabric only
 const sort = '0';
 
 const storageConfigToString = (config) => {
@@ -15,17 +16,16 @@ const storageConfigToString = (config) => {
         + config.gameVersion + '-'
         + config.pageSize + '-'
         + config.index + '-'
-        + config.searchFilter + '-',
+        + config.searchFilter + '-'
         + config.sort;
 }
 
 const checkCache = (config) => {
     const key = storageConfigToString(config);
-    const cache = storage.get('cachedSearches')
-    return cache[key];
+    return storage.get('cachedSearches');
 }
 
-export const createSearchConfig = (searchFilter, gameVersion, pageSize = 20, index = 0) => {
+export const createSearchConfig = (searchFilter, gameVersion, pageSize = '20', index = '0') => {
     return {
         gameId,
         sectionId,
@@ -39,16 +39,19 @@ export const createSearchConfig = (searchFilter, gameVersion, pageSize = 20, ind
 }
 
 export const searchMods = async (config) => {
-    const cachedValue = checkCache(config);
-    if(cachedValue) {
+    const cache = checkCache(config);
+    const key = storageConfigToString(config);
+    console.log('key', key);
+    if(cache[storageConfigToString(config)]) {
         console.log('found in cache, using that');
-        return cachedValue;
+        return cache[storageConfigToString(config)];
     }
 
     try {
         const resp = await axios.get(baseUrl, {params: config});
         console.log('caching result');
-        storage.set('cachedSearches.' + storageConfigToString(config), resp.data);
+        cache[storageConfigToString(config)] = resp.data;
+        storage.set('cachedSearches', cache);
         return resp.data;
     } catch (err) {
         console.log('err', err);

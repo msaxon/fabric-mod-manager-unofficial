@@ -7,14 +7,11 @@ import { createSearchConfig, searchMods } from '../../services/twitch-services';
 
 export default function SearchPage() {
     const [search, setSearch] = useState('');
-    const [version, setVersion] = useState('');
+    const [version, setVersion] = useState(minecraftVersions[0]);
     const [foundMods, setFoundMods] = useState([]);
     const history = useHistory();
     const selectedModpack = useSelectedModpack();
     const storage = useStorage();
-
-    console.log('searchMods', search);
-    console.log('foundMods', foundMods);
 
     const searchForMods = async () => {
         const config = createSearchConfig(search, version);
